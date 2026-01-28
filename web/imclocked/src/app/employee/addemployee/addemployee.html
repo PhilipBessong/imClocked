@@ -1,1 +1,43 @@
-<p>addemployee works!</p>
+<section class="addemployee-section py-5">
+  <div class="container">
+  <h2>Register New Employee</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" formControlName="fullName" placeholder="John Doe">
+      <small *ngIf="employeeForm.get('fullName')?.invalid && employeeForm.get('fullName')?.touched">
+        Name is required (min 3 chars).
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="email@example.com">
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text" formControlName="phoneNumber" placeholder="123-456-7890">
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label>Role</label>
+        <select formControlName="role">
+          <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+        <select formControlName="status">
+          <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="employeeForm.invalid">Add Employee</button>
+  </form>
+</div>
+</section>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   imports: [],
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
+  constructor(private router: Router) {}
+
+  toEmployeeList() {
+    this.router.navigate(['/viewemployee']);
+  }
 
 }

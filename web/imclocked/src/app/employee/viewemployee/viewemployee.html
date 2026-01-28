@@ -1,1 +1,59 @@
-<p>viewemployee works!</p>
+<section class="viewemployee-section py-5">
+  <div><button (click)="toAddEmployee()">Add Employee</button></div>
+  <div class="view-container">
+  <div class="header">
+    <h2>Employee Directory</h2>
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Search by name or email..."
+      class="search-bar"
+    />
+  </div>
+
+  <table class="employee-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Contact</th>
+        <th>Biometrics</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of filteredEmployees">
+        <td>
+          <div class="name-cell">
+            <strong>{{ emp.fullName }}</strong>
+            <small>ID: {{ emp.userId }}</small>
+          </div>
+        </td>
+        <td><span class="badge role">{{ emp.role }}</span></td>
+        <td>
+          <div>{{ emp.email }}</div>
+          <small>{{ emp.phoneNumber }}</small>
+        </td>
+        <td>
+          <span [class]="emp.faceTemplate ? 'text-success' : 'text-danger'">
+            {{ emp.faceTemplate ? '✅ Registered' : '❌ Missing' }}
+          </span>
+        </td>
+        <td>
+          <span class="status-pill" [ngClass]="emp.status.toLowerCase()">
+            {{ emp.status }}
+          </span>
+        </td>
+        <td>
+          <button class="btn-edit">Edit</button>
+          <button class="btn-delete" (click)="onDelete(emp.userId)">Delete</button>
+        </td>
+      </tr>
+      <tr *ngIf="filteredEmployees.length === 0">
+        <td colspan="6" class="no-data">No employees found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </section>

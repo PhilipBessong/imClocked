@@ -48,4 +48,22 @@ export class EmployeeService {
     this.faceTemplates.push(dummyFaceTemplate);
     dummyEmployee.faceTemplate = dummyFaceTemplate;
   }
+
+  addEmployee(employee: Omit<Employee, 'userId' | 'createdAt' | 'updatedAt'>) {
+  const newEmployee: Employee = {
+    ...employee,
+    userId: Math.random().toString(36).substr(2, 9), // Simple ID generator
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  this.employees.push(newEmployee);
+  console.log('Employee added:', newEmployee);
+}
+getEmployees(): Employee[] {
+  return this.employees;
+}
+
+deleteEmployee(userId: string) {
+  this.employees = this.employees.filter(emp => emp.userId !== userId);
+}
 }
